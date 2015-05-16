@@ -103,7 +103,7 @@ public class SparkServer {
             connector = createSocketConnector(server);
         } else {
             connector = createSecureSocketConnector(server, keystoreFile,
-                                                    keystorePassword, truststoreFile, truststorePassword);
+                    keystorePassword, truststoreFile, truststorePassword);
         }
 
         // Set some timeout options to make debugging easier.
@@ -113,7 +113,7 @@ public class SparkServer {
         connector.setPort(port);
 
         server = connector.getServer();
-        server.setConnectors(new Connector[] {connector});
+        server.setConnectors(new Connector[]{connector});
 
         // Handle static file routes
         if (staticFilesFolder == null && externalFilesFolder == null) {
@@ -223,7 +223,7 @@ public class SparkServer {
             ResourceHandler resourceHandler = new ResourceHandler();
             Resource staticResources = Resource.newClassPathResource(staticFilesRoute);
             resourceHandler.setBaseResource(staticResources);
-            resourceHandler.setWelcomeFiles(new String[] {"index.html"});
+            resourceHandler.setWelcomeFiles(new String[]{"index.html"});
             handlersInList.add(resourceHandler);
         }
     }
@@ -234,16 +234,13 @@ public class SparkServer {
     private static void setExternalStaticFileLocationIfPresent(String externalFilesRoute,
                                                                List<Handler> handlersInList) {
         if (externalFilesRoute != null) {
-            try {
-                ResourceHandler externalResourceHandler = new ResourceHandler();
-                Resource externalStaticResources = Resource.newResource(new File(externalFilesRoute));
-                externalResourceHandler.setBaseResource(externalStaticResources);
-                externalResourceHandler.setWelcomeFiles(new String[] {"index.html"});
-                handlersInList.add(externalResourceHandler);
-            } catch (IOException exception) {
-                exception.printStackTrace(); // NOSONAR
-                System.err.println("Error during initialize external resource " + externalFilesRoute); // NOSONAR
-            }
+
+            ResourceHandler externalResourceHandler = new ResourceHandler();
+//            Resource externalStaticResources = Resource.newResource(new File(externalFilesRoute));
+            externalResourceHandler.setResourceBase(externalFilesRoute);
+            externalResourceHandler.setWelcomeFiles(new String[]{"index.html"});
+            handlersInList.add(externalResourceHandler);
+
         }
     }
 

@@ -69,12 +69,13 @@ public class ServletTest {
             }
         }).start();
 
-        sleep(1000);
+        sleep(5000);
     }
 
     @Test
     public void testGetHi() {
         try {
+
             UrlResponse response = testUtil.doMethod("GET", SOMEPATH + "/hi", null);
             Assert.assertEquals(200, response.status);
             Assert.assertEquals("Hello World!", response.body);
