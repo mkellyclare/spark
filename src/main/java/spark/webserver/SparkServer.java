@@ -107,7 +107,7 @@ public class SparkServer {
         }
 
         // Set some timeout options to make debugging easier.
-        connector.setIdleTimeout(TimeUnit.HOURS.toMillis(1));
+        connector.setIdleTimeout(100);
         connector.setSoLingerTime(-1);
         connector.setHost(host);
         connector.setPort(port);
