@@ -20,7 +20,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 import javax.servlet.Filter;
-import javax.servlet.ReadListener;
 import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -90,21 +89,6 @@ class JettyHandler extends SessionHandler {
 
             public CachedServletInputStream() {
                 byteArrayInputStream = new ByteArrayInputStream(cachedBytes);
-            }
-
-            @Override
-            public boolean isFinished() {
-                return true;
-            }
-
-            @Override
-            public boolean isReady() {
-                return true;
-            }
-
-            @Override
-            public void setReadListener(ReadListener readListener) {
-
             }
 
             @Override

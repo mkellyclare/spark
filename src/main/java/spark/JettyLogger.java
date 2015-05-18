@@ -62,11 +62,6 @@ public class JettyLogger implements Logger {
     }
 
     @Override
-    public void debug(String s, long l) {
-        logger.debug(s);
-    }
-
-    @Override
     public String getName() {
         return "Spark Jetty Logger";
     }
